@@ -1,0 +1,144 @@
+<!--/
+    CartChing Theme / Stylish
+    Copyright (c) CartChing, 2011 | http://cartching.com
+/-->
+
+<!-- #EXTENDS file="theme-shop.html" -->
+
+<!-- #BLOCK for="page_title" --><!-- #ENDBLOCK -->
+<!-- #BLOCK for="page_description" -->
+<!-- #IF {{category.excerpt}} -->
+    <!-- #var {{ pagedescription = category.excerpt | strip_html | html_encode }} -->
+    <meta name="description" content="{{pagedescription}}" />
+    <meta property="og:description" content="{{pagedescription}}" />
+<!-- #ELSE -->
+    <!-- #IF {{page.description}} -->
+    <!-- #var {{ pagedescription = page.description | strip_html | html_encode }} -->
+    <meta name="description" content="{{pagedescription}}" />
+    <meta property="og:description" content="{{pagedescription}}" />
+    <!-- #ENDIF -->
+<!-- #ENDIF -->
+<!-- #ENDBLOCK -->
+<!-- #BLOCK for="page_image" --><!-- #ENDBLOCK -->
+<!-- #BLOCK for="page_type" --><meta property="og:type" content="product" /><!-- #ENDBLOCK -->
+<!-- #BLOCK for="head_content" --><!-- #ENDBLOCK -->
+
+
+<!-- #BLOCK for="breadcrumbs" -->
+<nav class="breadcrumbs">
+    <ol>
+        <li class="crumb home first"><a href="/shop/">Home</a></li>
+        <!-- #IF {{category}} -->
+            <!-- #IF {{category.parents}} -->
+                <!-- #FOREACH {{pcat in category.parents}} -->
+                    <li class="crumb"><a href="{{pcat.url}}">{{pcat}}</a></li>
+                <!-- #NEXT -->
+
+            <!-- #ENDIF -->
+            <li class="crumb current"><a href="{{category.url}}">{{category.name}}</a></li>
+        <!-- #ELSE -->
+            <li class="crumb back"><a href="javascript:history.go(-1)">Back to List</a></li>
+        <!-- #ENDIF -->
+                    
+    </ol>
+</nav>
+<!-- #ENDBLOCK -->
+
+
+<!-- #BLOCK for="content_area" -->
+	
+
+	<header role="page">
+
+		<!-- #IF {{store.loggedin}} --><a class="store-edit" href="{{category.editurl}}">(Edit)</a><!-- #ENDIF -->
+
+		<h1>{{category.name | html_encode}}</h1>
+
+        <!-- #IF {{category.description}} -->
+        <section class="category-description html">{{category.description}}</section>
+        <!-- #ENDIF -->
+
+	</header>
+
+
+<!-- #IF {{category.products}} -->
+<!-- #var {{ pagedProducts = category.products | paged(20) }} -->
+
+
+	<section class="products">
+
+
+        <!-- #FOREACH {{product in pagedProducts }} -->
+        <article class="hproduct product {{product.slug}}">
+        
+        	<!-- #IF {{store.loggedin}} --><a class="store-edit" href="{{product.editurl}}">(Edit)</a><!-- #ENDIF -->
+            
+            <!-- #IF {{product.image}} -->
+            <figure>
+            <a href="{{product.url}}" rel="product"><img src="{{product.image}}?w=280&h=180&crop=true" alt="{{product.name | html_encode}}" class="photo" /></a>
+            </figure>
+	        <!-- #ENDIF -->
+                        
+            <header><h1><a href="{{product.url}}">{{product.name | html_encode}}</a></h1></header>
+
+			<section>
+
+                <p class="price">
+                    <!-- #IF {{product.onsale}} -->
+                    <del><span class="currency">{{store.currency_sign}}</span><span class="dollars">{{product.fullprice | money_dollars}}</span><!-- #IF {{product.fullprice | money_cents}} --><span class="cents">.{{product.fullprice | money_cents}}</span><!-- #ENDIF --></del>
+                    <!-- #ENDIF -->
+                    <span class="currency">{{store.currency_sign}}</span><span class="dollars">{{product.price | money_dollars}}</span><!-- #IF {{product.price | money_cents}} --><span class="cents">.{{product.price | money_cents}}</span><!-- #ENDIF -->
+                </p>
+                
+                <p class="excerpt">{{product.excerpt | html_encode}}</p>
+	
+    		</section>
+
+            <!-- 
+            <footer>
+                <p class="fn url"><a href="{{product.url}}">Buy &rarr;</a></p>
+            </footer>
+			-->
+
+        </article>
+        <!--#NEXT -->
+
+        <div class="clear"></div>
+
+
+
+        <!-- #IF {{pagedproducts.pages}} -->
+        <section class="paging category bottom">
+        	<nav>
+            {{ pagedProducts | pager }}
+            </nav>
+        </section>
+        <!-- #ENDIF -->
+
+
+	</section>
+
+
+
+
+
+
+<!-- #ELSE -->        
+        
+    
+    <h2>There are no items for <strong>{{category.name | html_encode}}</strong></h2>
+    <p>However you might find something else your looking for on our store.</p>
+    <p><a href="{{store.url}}" class="continue" title="Continue shopping">Continue shopping</a></p>                 
+    
+                                
+<!-- #ENDIF -->
+
+
+
+<!-- #ENDBLOCK -->
+
+
+
+
+<!-- #BLOCK for="script_content" -->
+<!-- #ENDBLOCK -->

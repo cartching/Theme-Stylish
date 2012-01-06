@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+    <!--
+        CartChing Theme / Stylish
+        Copyright (c) CartChing, 2011 | http://cartching.com
+    -->
+
+    <!-- #BLOCK name="page_title" --><title>{{page.title | html_encode}}</title><!-- #ENDBLOCK -->
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="title" content="{{store | html_encode}}" />
+
+	<meta name="robots" content="noindex, nofollow" />
+    
+    <link rel="canonical" href="{{store.url}}" />
+    <link rel="home" title="home" href="{{store.url}}" />
+
+	<link rel="stylesheet" media="all" href="/themes/stylish/files/theme.css" />
+	<!-- <link rel="stylesheet" media="all" href="{{theme.files}}/theme.css?t=v1" /> -->
+    <link rel="stylesheet" media="all" href="/files/custom.css" />
+    <!--[if IE]><link rel="stylesheet" media="screen" href="{{theme.files}}/ie.css" /><![endif]-->
+    
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+    <script src="{{theme.files}}/main.js"></script>
+    <!-- #BLOCK name="head_content" --><!-- #ENDBLOCK -->
+    
+    <!-- #IF {{snippets.head-content}} -->
+    {{snippets.head-content}}
+    <!-- #ELSE -->
+        <!-- // Snippet: Head Content
+            Example -
+            <meta name="google-site-verification" content="" />
+        -->
+    <!-- #ENDIF -->
+
+</head>
+
+
+<!-- #BLOCK name="body_tag" -->    
+<body id="{{page.id}}" class="{{page.id}} {{page.template}} theme-checkout">
+<!-- #ENDBLOCK -->
+
+
+<div class="wrap">
+
+
+
+    <!-- #IF {{page.hasmessage}} -->
+    <section class="pagemsg" id="pagemsg">
+        <div class="msg {{page.messagetype|lowercase}}">
+    
+            <!-- #IF {{page.hasmessagetitle}} --><h3>{{page.messagetitle}}</h3><!-- #ENDIF -->
+            <!-- #IF {{page.hasmessagedetails}} --><p>{{page.messagedetails}}</p><!-- #ENDIF -->
+
+            <div class="buttons">
+	            <a href="#" class="close" onClick="$('#pagemsg').fadeOut();" title="Click to Close" rel="nofollow">Close</a>
+			</div>
+    
+        </div>
+    </section>
+    <!-- #ENDIF -->
+
+
+
+    <!-- #IF {{customer.loggedin}} -->
+	<section role="userbar" class="userbar loggedin">
+    	<nav>
+            <ul>
+                <li class="welcome">Welcome, <strong> {{customer.firstname}}!</strong></li>
+                <li class="account"><a href="/account/" rel="nofollow">Account</a></li>
+                <li class="orders"><a href="/orders/" rel="nofollow">Orders</a></li>
+                <!-- #IF {{cart.items.count}} -->
+                <li class="cart"><a href="/cart/" rel="nofollow">Cart / {{cart.totalprice | money}} ({{cart.items.count}} items)</a></li>
+                <!-- #ENDIF -->
+                <li class="signout"><a href="/account/logout?returnurl={{page.url}}" rel="nofollow">Sign Out</a></li>
+            </ul>
+		</nav>
+    </section>
+    <!-- #ELSE -->
+	<section role="userbar" class="userbar signin">
+		<nav>
+        <ul>
+            <!-- #IF {{cart.items.count}} -->
+            <li class="cart"><a href="/cart/" rel="nofollow">Cart / <!-- #IF {{cart.items.count}} -->{{cart.totalprice | money}} ({{cart.items.count}} items)<!-- #ELSE -->{{store.currency_sign}}0<!-- #ENDIF --></a></li>
+                <!-- #ENDIF -->
+            <li class="signin"><a href="/account/" rel="nofollow">Sign In</a></li>
+            <li class="last account"><a href="/account/" rel="nofollow"><a href="/account#create">Create Account</a></li>
+        </ul>
+        </nav>
+        <!-- #IF {{cart.items.count}} -->
+        <!-- #ENDIF -->
+    </section>
+    <!-- #ENDIF -->
+
+
+
+
+    <header class="header" role="masthead">
+
+        <h1 class="logo" title="{{store | html_encode}}"><a href="{{store.url}}">{{store | html_encode}}</a></h1>
+
+        <nav role="navigation" class="navigation">
+            <ul>
+                <!-- #FOREACH {{link in links.nav}} -->
+                <li class="nav-{{link.slug}}"><a href="{{link.url}}" title="{{link.name | html_encode}}">{{link.name | html_encode}}</a></li>
+                <!-- #NEXT -->
+            </ul>
+        </nav>
+
+    </header>
+
+
+
+	<section id="content" role="content">
+
+        <!-- #BLOCK name="breadcrumbs" -->
+		<!-- #ENDBLOCK -->
+
+        <!-- #BLOCK name="content_area" -->
+        <!-- #ENDBLOCK -->
+    
+    </section>
+
+
+    <footer class="footer" role="siteinfo">
+        
+        <p class="cite"><small><cite><abbr title="Copyright">&#169;</abbr> 2011 <a href="{{store.url}}">{{store | html_encode}}</a>.</cite> All Rights Reserved.</small></p> 
+        <div class="clearfix"></div>
+ 
+    </footer>
+
+
+</div>
+
+<!-- #BLOCK name="script_content" --><!-- #ENDBLOCK -->
+<script src="http://cachedcommons.org/cache/modernizr/1.5.0/javascripts/modernizr-min.js"></script>
+<script src="http://cachedcommons.org/cache/html5-enabled/1.0.0/javascripts/html5-enabled-min.js"></script>
+<!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+<!-- #IF {{snippets.script-content}} -->
+{{snippets.script-content}}
+<!-- #ELSE -->
+<!-- // Snippet: Script Content
+        Example -
+        Google Anayltics Code <script>...</script>
+-->
+<!-- #ENDIF -->
+
+</body>
+</html>
