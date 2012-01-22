@@ -23,6 +23,9 @@
     <!--[if IE]><link rel="stylesheet" media="screen" href="{{theme.files}}/ie.css" /><![endif]-->
     
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+	<script src="http://cachedcommons.org/cache/modernizr/1.5.0/javascripts/modernizr-min.js"></script>
+    <script src="http://cachedcommons.org/cache/html5-enabled/1.0.0/javascripts/html5-enabled-min.js"></script>
+	<!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
     <script src="{{theme.files}}/main.js"></script>
     <!-- #BLOCK name="head_content" --><!-- #ENDBLOCK -->
     
@@ -135,9 +138,6 @@
 </div>
 
 <!-- #BLOCK name="script_content" --><!-- #ENDBLOCK -->
-<script src="http://cachedcommons.org/cache/modernizr/1.5.0/javascripts/modernizr-min.js"></script>
-<script src="http://cachedcommons.org/cache/html5-enabled/1.0.0/javascripts/html5-enabled-min.js"></script>
-<!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
 <!-- #IF {{snippets.script-content}} -->
 {{snippets.script-content}}
